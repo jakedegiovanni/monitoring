@@ -10,7 +10,7 @@ Logs to ....
 
 - Collector agent
   - Exposes otel-collector:9091/metrics for metrics
-  - pushes to <TODO> for traces
+  - Pushes to tempo:4317 for traces
   - <TODO> logs...
 - Push to agent :4317 for grpc instruments
 
@@ -21,8 +21,22 @@ Logs to ....
 
 ## Grafana
 
+http://localhost:3000
+
 ### Metrics
+
+Scrapes Prometheus endpoint http://localhost:9090 to gather metrics.
 
 ### Grafana Loki
 
+Logs.
+
 ### Grafana Tempo
+
+Used for traces.
+
+Scrapes http://tempo:3200 to gather traces.
+
+### Pyroscope
+
+Profiling.

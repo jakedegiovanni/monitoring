@@ -5,12 +5,15 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
+
 processors:
   batch:
 
 exporters:
-  otlp:
-    endpoint: otelcol:4317
+  otlp/traces:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
   prometheus:
     endpoint: ":9091"
     send_timestamps: true
@@ -24,7 +27,7 @@ service:
       processors:
         - batch
       exporters:
-        - otlp
+        - otlp/traces
     metrics:
       receivers:
         - otlp
@@ -32,10 +35,10 @@ service:
         - batch
       exporters:
         - prometheus
-    logs:
-      receivers:
-        - otlp
-      processors:
-        - batch
-      exporters:
-        - otlp
+    # logs:
+    #   receivers:
+    #     - otlp
+    #   processors:
+    #     - batch
+    #   exporters:
+    #     - otlp
