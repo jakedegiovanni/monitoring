@@ -1,3 +1,6 @@
+volumes:
+  log-files:
+    - .
 services:
   otel-collector:
     image: otel/opentelemetry-collector-contrib
@@ -24,6 +27,15 @@ services:
     ports:
       - "3200"
       - "4317"
+  loki:
+    image: grafana/loki
+    command:
+      - "--config.file=/etc/loki.yaml"
+    volumes:
+      - ./loki/loki.yaml:/etc/loki.yaml
+    ports:
+      - "3100"
+      - "9096"
   grafana:
     image: grafana/grafana-oss
     ports:
